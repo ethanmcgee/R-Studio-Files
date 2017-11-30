@@ -1,0 +1,46 @@
+---
+title: "Scraping Juniata Sports"
+author: "Kim Roth"
+date: "11/9/2017"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+library(ggplot2)
+library(dplyr)
+library(XML) #This is the webscaping tool.
+```
+
+I want to webscrape from the game log of women's volleyball off the Juniata sports website
+http://www.juniatasports.net/sports/wvball/2017-18/teams/juniata?view=gamelog
+
+
+```{r}
+
+all<- readHTMLTable('http://www.juniatasports.net/sports/wvball/2017-18/teams/juniata?view=gamelog')
+
+class(all) # so  it's a list
+length(all) #of 10 which is the number of tables.
+```
+
+```{r}
+names(all)
+all[[1]] #table number 1
+all[[2]]#table number 2
+all[[3]]#table number 3
+all[[4]]#table number 4
+all[[5]] # table number 5
+all[[6]] #table number 6
+all[[7]] #table number 7
+all[[8]] #table number 8, the one I want.
+all[[9]] #table number 9
+all[[10]] #table number 10
+```
+```{r}
+games <- all[[8]] #bd stands for births and deaths
+head(games)
+names(games) #Note lots of these names have spaces which is not preferable and year is unlabeled
+
+
+```
+Names look okay although we may want to change some. What's wrong with the formatting? How do we fix that? Anything else we might want to clean?
